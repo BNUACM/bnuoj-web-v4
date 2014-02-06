@@ -1,0 +1,40 @@
+{
+	"name": "bnuoj/v4",
+	"description": "BNUOJ Version 4",
+	"keywords": ["BNUOJ", "laravel"],
+	"license": "GPL-3.0+",
+	"require": {
+		"laravel/framework": "4.1.*",
+		"codesleeve/asset-pipeline": "dev-master",
+		"components/bootstrap": "3.1.*",
+		"components/jquery": "1.*@dev",
+		"components/underscore": "dev-master"
+	},
+	"autoload": {
+		"classmap": [
+			"app/commands",
+			"app/controllers",
+			"app/models",
+			"app/database/migrations",
+			"app/database/seeds",
+			"app/tests/TestCase.php"
+		]
+	},
+	"scripts": {
+		"post-install-cmd": [
+			"php artisan clear-compiled",
+			"php artisan optimize"
+		],
+		"post-update-cmd": [
+			"php artisan clear-compiled",
+			"php artisan optimize"
+		],
+		"post-create-project-cmd": [
+			"php artisan key:generate"
+		]
+	},
+	"config": {
+		"preferred-install": "dist"
+	},
+	"minimum-stability": "stable"
+}
