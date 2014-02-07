@@ -5,25 +5,31 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="loginModal">Login</h4>
             </div>
-            <form action="ajax/login.php" method="post" id="login_form" class="ajform form-horizontal" role="form">
+            {{ Form::open(array(
+                'route' => 'login',
+                'id' => 'login_form',
+                'class' => 'ajform form-horizontal',
+                'role' => 'form'
+            )) }}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-sm-3" for="username">Username </label>
+                        {{ Form::label('username', 'Username', array('class' => 'control-label col-sm-3')) }}
                         <div class="col-sm-9">
-                            <input class="form-control" type='text' name='username' id='username' placeholder="Username" />
+                            {{ Form::text('username', '', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3" for="password">Password </label>
+                        {{ Form::label('password', 'Password', array('class' => 'control-label col-sm-3')) }}
                         <div class="col-sm-9">
-                            <input class="form-control" type='password' name='password' id='password' placeholder="Password" />
+                            {{ Form::password('password', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
                             <div class="checkbox">
                                 <label>
-                                    <input name='cksave' type="checkbox"> Remember me
+                                    {{ Form::checkbox('cksave', '1') }}
+                                    Remember me
                                 </label>
                             </div>
                         </div>
@@ -31,10 +37,10 @@
                 </div>
                 <div class="modal-footer">
                     <span id="msgbox" style="display:none"></span>
-                    <input name='login' class="btn btn-primary" type='submit' value='Login' />
+                    {{ Form::submit('Login', array('class' => 'btn btn-primary')) }}
                     <a class='toregister btn btn-default' href="#">Register</a>
                 </div>
-            </form>
+            {{ Form::close() }}
         </div>
     </div>
 </div>

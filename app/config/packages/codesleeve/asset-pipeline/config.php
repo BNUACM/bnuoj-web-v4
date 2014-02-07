@@ -38,7 +38,16 @@ return array(
 		'provider/assets/javascripts',
 		'provider/assets/stylesheets',
 		'provider/assets/images',
-		'components'
+
+		'components/jquery',
+		'components/bootstrap',
+		'components/form',
+		'components/underscore',
+
+		'vendor/datatables/datatables',
+		'vendor/moment/moment',
+		'vendor/assets/javascripts',
+		'vendor/assets/stylesheets',
 	),
 
 	/*

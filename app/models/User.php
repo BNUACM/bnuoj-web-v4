@@ -58,14 +58,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->email;
     }
 
-    /**
-     * Get whether this user is Admin
-     * @return boolean
-     */
-    public function isAdmin() {
-        return ($this->isRoot == 1);
-    }
-
     public function statuses() {
         return $this->hasMany('Status', 'username', 'username');
     }
@@ -80,6 +72,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function contestClarify() {
         return $this->hasMany('ContestClarify', 'username', 'username');
+    }
+
+    /**
+     * Get whether this user is Admin
+     * @return boolean
+     */
+    public function isAdmin() {
+        return ($this->isRoot == 1);
+    }
+
+    public function unreadMailCount() {
+        return 0;
     }
 
 }

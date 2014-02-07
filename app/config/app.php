@@ -109,8 +109,12 @@ return array(
 
         // assets-pipeline: https://github.com/codesleeve/asset-pipeline
         'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
+        
         // console: https://github.com/darsain/laravel-console
         // 'Darsain\Console\ConsoleServiceProvider',
+        
+        // datatable-bundle
+        'Bllim\Datatables\DatatablesServiceProvider',
 
     ),
 
@@ -178,6 +182,7 @@ return array(
         'Validator'       => 'Illuminate\Support\Facades\Validator',
         'View'            => 'Illuminate\Support\Facades\View',
 
+        'Datatables'      => 'Bllim\Datatables\Datatables',
     ),
 
 );

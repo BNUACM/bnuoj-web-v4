@@ -5,50 +5,55 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="registerModal">Register</h4>
             </div>
-            <form method="post" action="ajax/register.php" id="reg_form" class="form-horizontal ajform" role="form">
+            {{ Form::open(array(
+                'url' => '/register',
+                'id' => 'reg_form',
+                'class' => 'ajform form-horizontal',
+                'role' => 'form'
+            )) }}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="rusername">Username </label>
+                        {{ Form::label('username', 'Username', array('class' => 'control-label col-sm-4')) }}
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" name="username" id="rusername" placeholder="Username" />
+                            {{ Form::text('username', '', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="rpassword">Password </label>
+                        {{ Form::label('password', 'Password', array('class' => 'control-label col-sm-4')) }}
                         <div class="col-sm-8">
-                            <input class="form-control" type="password" name="password" id="rpassword" placeholder="Password" />
+                            {{ Form::password('password', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="rrpassword">Repeat Password </label>
+                        {{ Form::label('repassword', 'Repeat Password', array('class' => 'control-label col-sm-4')) }}
                         <div class="col-sm-8">
-                            <input class="form-control" type="password" name="repassword" id="rrpassword" placeholder="Repeat Password" />
+                            {{ Form::password('repassword', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="rnickname">Nickname </label>
+                        {{ Form::label('nickname', 'Nickname', array('class' => 'control-label col-sm-4')) }}
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" name="nickname" id="rnickname" placeholder="Nickname" />
+                            {{ Form::text('nickname', '', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="rschool">School </label>
+                        {{ Form::label('school', 'School', array('class' => 'control-label col-sm-4')) }}
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" name="school" id="rschool" placeholder="School" />
+                            {{ Form::text('school', '', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="remail">Email </label>
+                        {{ Form::label('email', 'Email', array('class' => 'control-label col-sm-4')) }}
                         <div class="col-sm-8">
-                            <input class="form-control" type="email" name="email" id="remail" placeholder="Email" />
+                            {{ Form::email('email', '', array('class' => 'form-control')) }}
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <span id="msgbox" style="display:none"></span>
-                    <input class="btn btn-primary" type="submit" name="name" value="Submit" />
+                    {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
                 </div>
-            </form>
+            {{ Form::close() }}
         </div>
     </div>
 </div>

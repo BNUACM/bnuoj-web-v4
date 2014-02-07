@@ -8,7 +8,11 @@
 		"codesleeve/asset-pipeline": "dev-master",
 		"components/bootstrap": "3.1.*",
 		"components/jquery": "1.*@dev",
-		"components/underscore": "dev-master"
+		"components/underscore": "dev-master",
+		"datatables/datatables": "dev-master",
+		"bllim/datatables": "dev-master",
+		"moment/moment": "dev-master",
+		"malsup/form": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

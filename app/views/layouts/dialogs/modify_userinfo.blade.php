@@ -5,56 +5,61 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="modifyUserModal">Modify My Information</h4>
             </div>
-            <form method="post" action="ajax/user_modify.php" id="modify_form" class="form-horizontal ajform" role="form">
+            {{ Form::open(array(
+                'url' => '/register',
+                'id' => 'reg_form',
+                'class' => 'ajform form-horizontal',
+                'role' => 'form'
+            )) }}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="rusername">Username </label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="text" name="username" id="rusername" placeholder="Username" value="{{{ Auth::user()->username }}}" readonly />
+                        {{ Form::label('username', 'Username', array('class' => 'control-label col-sm-4')) }}
+                        <div class="col-sm-8">
+                            {{ Form::text('username', Auth::user()->username, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="ropassword">Old Password </label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="password" name="ol_password" id="ropassword" placeholder="Old Password" />
+                        {{ Form::label('ol_password', 'Old Password', array('class' => 'control-label col-sm-4')) }}
+                        <div class="col-sm-8">
+                            {{ Form::password('ol_password', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="rpassword">New Password </label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="password" name="password" id="rpassword" placeholder="New Password" />
+                        {{ Form::label('password', 'New Password', array('class' => 'control-label col-sm-4')) }}
+                        <div class="col-sm-8">
+                            {{ Form::password('password', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="rrpassword">Repeat Password </label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="password" name="repassword" id="rrpassword" placeholder="Repeat Password" />
+                        {{ Form::label('repassword', 'Repeat Password', array('class' => 'control-label col-sm-4')) }}
+                        <div class="col-sm-8">
+                            {{ Form::password('repassword', array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label  class="control-label col-sm-2" for="rnickname">Nickname </label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="text" name="nickname" id="rnickname" placeholder="Nickname" value="{{{ Auth::user()->nickname }}}" />
+                        {{ Form::label('nickname', 'Nickname', array('class' => 'control-label col-sm-4')) }}
+                        <div class="col-sm-8">
+                            {{ Form::text('nickname', Auth::user()->nickname, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="rschool">School </label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="text" name="school" id="rschool" placeholder="School" value="{{{ Auth::user()->school }}}" />
+                        {{ Form::label('school', 'School', array('class' => 'control-label col-sm-4')) }}
+                        <div class="col-sm-8">
+                            {{ Form::text('school', Auth::user()->school, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="remail">Email </label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="text" name="email" id="remail" placeholder="Email" value="{{{ Auth::user()->email }}}" />
+                        {{ Form::label('email', 'Email', array('class' => 'control-label col-sm-4')) }}
+                        <div class="col-sm-8">
+                            {{ Form::email('email', Auth::user()->email, array('class' => 'form-control')) }}
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <span id="msgbox" style="display:none"></span>
-                    <input class="btn btn-primary" type="submit" name="name" value="Modify" />
+                    {{ Form::submit('Modify', array('class' => 'btn btn-primary')) }}
                 </div>
-            </form>
+            {{ Form::close() }}
         </div>
     </div>
 </div>

@@ -10,7 +10,14 @@
 //
 // The available directives right now are require, require_directory, and require_tree
 //
-//= require jquery/jquery
-//= require bootstrap/js/bootstrap
-//= require underscore/underscore
-//= require_tree .
+//= require jquery
+//= require js/bootstrap
+//= require underscore
+//= require moment
+//= require media/js/jquery.dataTables
+//= require jquery.form
+//= require helpers
+//= require base_class
+//= require views/base_view
+//= require views/home_view
+//= require bootstrap

@@ -8,100 +8,23 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <title>{{{ $pagetitle or "BNU Online Judge" }}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        var currentTime = '{{ time() }}';
+    </script>
     <?= stylesheet_link_tag() ?>
     <?= javascript_include_tag() ?>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ route('index') }}">BNUOJ</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" id="nav">
-                    <li class="dropdown" id="problem">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="problem.php">Problem <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li id="localp"><a href="problem.php#oj=BNU">Local Problems</a></li>
-                            <li id="allp"><a href="problem.php">All Problems</a></li>
-                            <li id="categoryp"><a href="problem_category.php">Problem Category</a></li>
-                        </ul>
-                    </li>
-                    <li id="status"><a href="status.php">Status</a></li>
-                    <li class="dropdown" id="contest">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="contest.php?type=50">Contest <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li id="stdcontest"><a href="contest.php?type=50">Standard Contests</a></li>
-                            <li id="icpccontest"><a href="contest.php?type=0">Contests (ICPC format)</a></li>
-                            <li id="cfcontest"><a href="contest.php?type=1">Contests (CF format)</a></li>
-                            <li id="repcontest"><a href="contest.php?type=99">Replay Contests</a></li>
-                            <li id="vcontest"><a href="contest.php?virtual=1">Virtual Contests</a></li>
-                        </ul>
-                    </li>
-                    <li id="ranklist"><a href="ranklist.php">Ranklist</a></li>
-                    <li id="discuss"><a href="discuss.php">Discuss</a></li>
-                    <li class="dropdown" id="more">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="teaminfo.php">More... <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="news.php">News</a></li>
-                            <li><a href="teaminfo.php">Our Team</a></li>
-                            <li><a href="http://www.oiegg.com/forumdisplay.php?fid=407" target="_blank">BBS</a></li>
-                            <li class="divider"></li>
-                            <li><a href="recent_contest.php">Recent Contests</a></li>
-                            <li class="divider"></li>
-                            <li class="disabled"><a>Coming Soon...</a></li>
-                        </ul>
-                    </li>
-                </ul>
-@unless (Auth::check())
-                <ul id="loginbar" class="nav navbar-nav pull-right">
-                    <li id="loginbutton"><a href="#" id="login" data-toggle="modal" data-target="#logindialog">Login</a></li>
-                    <li id="register"><a href="#" class="toregister" data-toggle="modal" data-target="#regdialog">Register</a></li>
-                </ul>
-@else
-                <ul id="logoutbar" class="nav navbar-nav pull-right">
-                    <li class="dropdown" id="userspace">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="/user/{{{ Auth::user()->username }}}" id="displayname">
-                            {{{ Auth::user()->username }}}
-                            @if (Auth::user()->unreadMailCount() > 0)
-                            <b style='color:#F00'> ({{ Auth::user()->unreadMailCount() }}) <b class="caret"></b></a>
-                            @endif
-                        <ul class="dropdown-menu">
-                            <li><a href="/user/{{{ Auth::user()->username }}}">Show My Information</a></li>
-                            <li><a href="#" id="modify">Modify My Information</a></li>
-                            <li><a href="mail.php" id="mail">
-                                Mail
-                                @if (Auth::user()->unreadMailCount() > 0)
-                                <b style='color:#F00'> ({{ Auth::user()->unreadMailCount() }}) <b class="caret"></b></a>
-                                @endif
-                            </a></li>
-    @if (Auth::user()->isAdmin())
-                            <li><a href="admin_index.php" id="admin">Administration</a></li>
-    @endif
-                            <li id="logoutbutton"><a href="#" id="logout">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-@endunless
-                <p class="pull-right navbar-text"><span id="servertime"><?= date("Y-m-d H:i:s") ?></span>&nbsp;</p>
-            </div><!--/.nav-collapse -->
-        </div>
-    </div>
+@include("layouts.navbar")
     <marquee class="hidden-xs" direction="left" behavior="alternate" scrollamount="2" style="position:absolute;width:100%;"></marquee>
     <div class="hidden-xs" id="marqueepos"></div>
     <div class="container" id="page-content">
         <div class="row">
-
+@yield('content')
         </div>    
         <hr />
         <footer id="footer">

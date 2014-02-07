@@ -3,8 +3,63 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b7c64c5e6da346f9d2d6642af3c81337",
+    "hash": "b91f96b5d7f089e53f20b2e86a7f0396",
     "packages": [
+        {
+            "name": "bllim/datatables",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bllim/laravel4-datatables-package.git",
+                "reference": "e069517ba189994ef5d0608e2b828c3c1bb47e21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bllim/laravel4-datatables-package/zipball/e069517ba189994ef5d0608e2b828c3c1bb47e21",
+                "reference": "e069517ba189994ef5d0608e2b828c3c1bb47e21",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">=4.0.0",
+                "illuminate/filesystem": ">=4.0.0",
+                "illuminate/support": ">=4.0.0",
+                "illuminate/view": ">=4.0.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "laravel/laravel": ">=4.0.0",
+                "mockery/mockery": "0.7.2",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Bllim\\Datatables": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bilal Gultekin",
+                    "email": "bilal@bilal.im"
+                }
+            ],
+            "description": "Server-side handler of DataTables Jquery Plugin for Laravel 4",
+            "keywords": [
+                "datatable",
+                "datatables",
+                "datatables jquery plugin",
+                "laravel",
+                "laravel4"
+            ],
+            "time": "2014-01-19 13:29:42"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "1.0.1",
@@ -374,6 +429,29 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "time": "2014-01-17 12:21:18"
+        },
+        {
+            "name": "datatables/datatables",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DataTables/DataTables.git",
+                "reference": "87e0d43844bcaae6e77fcdea3f24991e266cae06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/87e0d43844bcaae6e77fcdea3f24991e266cae06",
+                "reference": "87e0d43844bcaae6e77fcdea3f24991e266cae06",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
+            "homepage": "http://www.datatables.net/",
+            "time": "2014-02-05 14:02:23"
         },
         {
             "name": "filp/whoops",
@@ -787,6 +865,90 @@
             "description": "scssphp is a compiler for SCSS written in PHP.",
             "homepage": "http://leafo.net/scssphp/",
             "time": "2013-12-23 23:28:02"
+        },
+        {
+            "name": "malsup/form",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/malsup/form.git",
+                "reference": "fa6a21319ca58103a937d1fea8d5c76c5859fe44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/malsup/form/zipball/fa6a21319ca58103a937d1fea8d5c76c5859fe44",
+                "reference": "fa6a21319ca58103a937d1fea8d5c76c5859fe44",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=1.5"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "jquery.form.js"
+                    ],
+                    "shim": {
+                        "deps": [
+                            "jquery"
+                        ]
+                    }
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "M. Alsup",
+                    "homepage": "http://jquery.malsup.com"
+                }
+            ],
+            "description": "A simple way to AJAX-ify any form on your page; with file upload and progress support.",
+            "homepage": "http://jquery.malsup.com/form/",
+            "keywords": [
+                "ajax",
+                "form",
+                "upload"
+            ],
+            "time": "2014-02-05 19:56:29"
+        },
+        {
+            "name": "moment/moment",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moment/moment.git",
+                "reference": "abc3a14b2ed7c9f4ff420395f3e1f198459528d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moment/moment/zipball/abc3a14b2ed7c9f4ff420395f3e1f198459528d8",
+                "reference": "abc3a14b2ed7c9f4ff420395f3e1f198459528d8",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Parse, validate, manipulate, and display dates in javascript.",
+            "homepage": "http://github.com/moment/moment/",
+            "keywords": [
+                "date",
+                "ender",
+                "format",
+                "i18n",
+                "l10n",
+                "moment",
+                "parse",
+                "time",
+                "validate"
+            ],
+            "time": "2014-01-22 09:26:21"
         },
         {
             "name": "monolog/monolog",
@@ -2062,7 +2224,11 @@
     "stability-flags": {
         "codesleeve/asset-pipeline": 20,
         "components/jquery": 20,
-        "components/underscore": 20
+        "components/underscore": 20,
+        "datatables/datatables": 20,
+        "bllim/datatables": 20,
+        "moment/moment": 20,
+        "malsup/form": 20
     },
     "platform": [
 
