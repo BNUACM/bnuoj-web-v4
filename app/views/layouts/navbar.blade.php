@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -46,25 +46,25 @@
                 </li>
             </ul>
 @unless (Auth::check())
-            <ul id="loginbar" class="nav navbar-nav pull-right">
-                <li id="loginbutton"><a href="#" id="login" data-toggle="modal" data-target="#logindialog">Login</a></li>
-                <li id="register"><a href="#" class="toregister" data-toggle="modal" data-target="#regdialog">Register</a></li>
+            <ul id="loginbar" class="nav navbar-nav navbar-right">
+                <li id="loginbutton"><a href="#" data-toggle="modal" data-target="#logindialog">Login</a></li>
+                <li id="register"><a href="#" data-toggle="modal" data-target="#regdialog">Register</a></li>
             </ul>
 @else
-            <ul id="logoutbar" class="nav navbar-nav pull-right">
+            <ul id="logoutbar" class="nav navbar-nav navbar-right">
                 <li class="dropdown" id="userspace">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="/user/{{{ Auth::user()->username }}}" id="displayname">
                         {{{ Auth::user()->username }}}
-                        @if (Auth::user()->unreadMailCount() > 0)
-                        <b style='color:#F00'> ({{ Auth::user()->unreadMailCount() }}) <b class="caret"></b></a>
+                        @if (Auth::user()->unreadMessageCount() > 0)
+                        <b style='color:#F00'> ({{ Auth::user()->unreadMessageCount() }}) <b class="caret"></b></a>
                         @endif
                     <ul class="dropdown-menu">
                         <li><a href="/user/{{{ Auth::user()->username }}}">Show My Information</a></li>
                         <li><a href="#" id="modify" data-toggle="modal" data-target="#modifydialog">Modify My Information</a></li>
                         <li><a href="mail.php" id="mail">
                             Mail
-                            @if (Auth::user()->unreadMailCount() > 0)
-                            <b style='color:#F00'> ({{ Auth::user()->unreadMailCount() }}) <b class="caret"></b></a>
+                            @if (Auth::user()->unreadMessageCount() > 0)
+                            <b style='color:#F00'> ({{ Auth::user()->unreadMessageCount() }}) <b class="caret"></b></a>
                             @endif
                         </a></li>
     @if (Auth::user()->isAdmin())
@@ -75,7 +75,7 @@
                 </li>
             </ul>
 @endunless
-            <p class="pull-right navbar-text"><span id="servertime"><?= date("Y-m-d H:i:s") ?></span>&nbsp;</p>
-        </div><!--/.nav-collapse -->
+            <p class="navbar-text navbar-right"><span id="servertime">{{ date("Y-m-d H:i:s") }}</span>&nbsp;</p>
+        </div><!--/.navbar-collapse -->
     </div>
 </div>

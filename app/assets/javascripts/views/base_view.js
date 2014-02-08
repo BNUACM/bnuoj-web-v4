@@ -5,7 +5,6 @@
             "shown.bs.modal #logindialog": "onLoginModalShown",
             "shown.bs.modal #modifydialog": "onModifyModalShown",
             "click .newslink": "onShowNews",
-            "click .toregister": "onShowRegisterModal",
             "correct #login_form": "onLoggedIn",
             "correct #reg_form": "onRegistered",
             "correct #modify_form": "onUserinfoModified"
@@ -61,37 +60,30 @@
             setInterval("Helpers.getTime()", 180000);
         },
 
-        onRegisterModalShown: function() {
-            $("#username", this).focus();
+        onRegisterModalShown: function(evt) {
+            $("#username", evt.target).focus();
         },
 
-        onLoginModalShown: function() {
-            $("#username", this).focus();
+        onLoginModalShown: function(evt) {
+            $("#username", evt.target).focus();
         },
 
-        onModifyModalShown: function() {
-            $("#ol_password", this).focus();
-        },
-
-        onShowRegisterModal: function(evt) {
-            $(this._selectors.LOGIN_MODAL).modal("hide");
-            $(this._selectors.REGISTER_MODAL).modal("show");
+        onModifyModalShown: function(evt) {
+            $("#ol_password", evt.target).focus();
         },
 
         onShowNews: function(evt) {
             var nnid = $(evt.target).attr("name");
             var self = this;
-            $.get("ajax/get_news.php", {'nnid': nnid, 'rand': Math.random() }, function(data) {
+            $.get("resource/news/" + nnid, { 'rand': Math.random() }).done(function(data) {
                 var gval = $.parseJSON(data);
-                if (gval.code == 0) {
-                    $("#sntitle", self._selectors.NEWS_MODAL).html(gval.title);
-                    $("#sncontent", self._selectors.NEWS_MODAL).html(gval.content);
-                    $("#sntime", self._selectors.NEWS_MODAL).html(gval.time_added);
-                    $("#snauthor", self._selectors.NEWS_MODAL).html("<a href='userinfo.php?name=" + gval.author + "'>" + gval.author + "</a>");
-                    $(".newseditbutton", self._selectors.NEWS_MODAL).attr("name",gval.newsid);
-                    $("#ntitle", self._selectors.NEWS_MODAL).html(gval.title);
-                    $(self._selectors.NEWS_MODAL).modal("show");
-                }
+                $("#sntitle", self._selectors.NEWS_MODAL).html(gval.title);
+                $("#sncontent", self._selectors.NEWS_MODAL).html(gval.content);
+                $("#sntime", self._selectors.NEWS_MODAL).html(gval.time_added);
+                $("#snauthor", self._selectors.NEWS_MODAL).html("<a href='userinfo.php?name=" + gval.author + "'>" + gval.author + "</a>");
+                $(".newseditbutton", self._selectors.NEWS_MODAL).attr("name", gval.newsid);
+                $("#ntitle", self._selectors.NEWS_MODAL).html(gval.title);
+                $(self._selectors.NEWS_MODAL).modal("show");
             });
             return false;
         },

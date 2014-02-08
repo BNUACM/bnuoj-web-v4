@@ -56,12 +56,12 @@
             }
         },
 
-        striptags: function(a) {
+        stripTags: function(a) {
             return a.replace(/(<([^>]+)>)/ig, "")
         },
 
         getURLPara: function(a) {
-            return decodeURIComponent((RegExp("[?|&|#]" + a + "=" + "(.*?)(&|#|;|$)").exec(location.href) || [, ""])[1].replace(/\+/g, "%20")) || null
+            return decodeURIComponent((RegExp("[?|&|#]" + a + "=" + "(.*?)(&|#|;|$)").exec(window.location.href) || [null, ""])[1].replace(/\+/g, "%20")) || null
         }
     }
 

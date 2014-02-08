@@ -1,5 +1,8 @@
 <?php
 
+// include $globalConfig to set Database
+require __DIR__.'/../../config.php';
+
 return array(
 
 	/*
@@ -26,7 +29,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'bnuoj',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -46,6 +49,17 @@ return array(
 
 	'connections' => array(
 
+	    'bnuoj' => array(
+			'driver'    => $globalConfig["database"]["driver"],
+			'host'      => $globalConfig["database"]["host"],
+			'database'  => $globalConfig["database"]["table"],
+			'username'  => $globalConfig["database"]["username"],
+			'password'  => $globalConfig["database"]["password"],
+			'charset'   => 'utf8',
+			'collation' => 'utf8_general_ci',
+			'prefix'    => '',
+		),
+
 		'sqlite' => array(
 			'driver'   => 'sqlite',
 			'database' => __DIR__.'/../database/production.sqlite',
@@ -53,15 +67,15 @@ return array(
 		),
 
 		'mysql' => array(
-			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'bnuoj',
-			'username'  => 'bnuojuser',
-			'password'  => 'bnuojpassword',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_general_ci',
-			'prefix'    => '',
-		),
+	        'driver'    => 'mysql',
+	        'host'      => 'localhost',
+	        'database'  => 'database',
+	        'username'  => 'root',
+	        'password'  => '',
+	        'charset'   => 'utf8',
+	        'collation' => 'utf8_unicode_ci',
+	        'prefix'    => '',
+	    ),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',

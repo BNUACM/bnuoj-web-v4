@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         var currentTime = '{{ time() }}';
+        var globalConfig = ({{ json_encode(Config::get('js_global_config')) }});
     </script>
     <?= stylesheet_link_tag() ?>
     <?= javascript_include_tag() ?>
@@ -24,7 +25,7 @@
     <div class="hidden-xs" id="marqueepos"></div>
     <div class="container" id="page-content">
         <div class="row">
-@yield('content')
+@yield('layout')
         </div>    
         <hr />
         <footer id="footer">
@@ -35,13 +36,13 @@
     </div>
 
 @unless (Auth::check())
-    @include("layouts.dialogs.login")
-    @include("layouts.dialogs.register")
+    @include("dialogs.login")
+    @include("dialogs.register")
 @else
-    @include("layouts.dialogs.modify_userinfo")
+    @include("dialogs.modify_userinfo")
 @endunless
 
-@include("layouts.dialogs.news")
+@include("dialogs.news")
 
 </body>
 </html>

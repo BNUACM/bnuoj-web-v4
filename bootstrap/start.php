@@ -69,4 +69,9 @@ require $framework.'/Illuminate/Foundation/start.php';
 |
 */
 
+require __DIR__.'/../config.php';
+
+Config::set('bnuoj', array_merge_recursive($globalConfig["public"], $globalConfig["secret"]));
+Config::set('js_global_config', $globalConfig["public"]);
+
 return $app;

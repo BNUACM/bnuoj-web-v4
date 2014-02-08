@@ -7,7 +7,7 @@ class Problem extends Eloquent {
     public $timestamps = false;
 
     public function ojinfo() {
-        return $this->hasOne('OJInfo', 'vname', 'oj');
+        return $this->hasOne('OJInfo', 'vname', 'name');
     }
 
     public function problemCategories() {

@@ -17,7 +17,7 @@ class HomeController extends BaseController {
 
     public function index()
     {
-        return View::make('layouts.layout_without_sidebar');
+        return View::make('layouts.index');
     }
 
     public function serverTime() {

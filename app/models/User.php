@@ -79,11 +79,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      * @return boolean
      */
     public function isAdmin() {
-        return ($this->isRoot == 1);
+        return ($this->isroot == 1);
     }
 
-    public function unreadMailCount() {
-        return 0;
+    public function unreadMessageCount() {
+        return $this->inMessages()->whereStatus('0')->count();
     }
 
 }

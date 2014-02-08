@@ -1,6 +1,7 @@
 @extends('layouts.base')
 
-@section('content')
+@section('layout')
     <div class="col-md-12">
+    @yield('content')
     </div>
 @stop
