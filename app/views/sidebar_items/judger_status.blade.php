@@ -1,10 +1,10 @@
 <h3>VJudge Status</h3>
 By checking remote status page every 10 minutes.
-<table class='table table-hover table-striped table-condensed' width='100%'>
+<table class='table table-hover table-striped table-condensed' width="100%">
     <thead>
         <tr>
-            <th width='70%'>OJ</th>
-            <th width='30%'>Status</th>
+            <th width="70%">OJ</th>
+            <th width="30%">Status</th>
         </tr>
     </thead>
     <tbody>

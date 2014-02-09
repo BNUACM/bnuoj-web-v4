@@ -19,3 +19,5 @@ Route::get('/timestamp', 'HomeController@serverTime');
 Route::resource('/resource/user', 'UserController');
 Route::resource('/resource/news', 'NewsController');
 Route::resource('/resource/contest', 'ContestController');
+Route::resource('/resource/problem', 'ProblemController');
+Route::controller('/problem', 'ProblemController');

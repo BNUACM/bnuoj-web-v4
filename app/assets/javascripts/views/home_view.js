@@ -6,8 +6,5 @@
         _selectors: _.extend({
         }, BaseView.prototype._selectors),
 
-        run: function() {
-
-        }
     });
 }).call(this, jQuery);

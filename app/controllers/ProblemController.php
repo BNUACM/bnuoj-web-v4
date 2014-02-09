@@ -1,9 +1,12 @@
 <?php
 
-class NewsController extends \BaseController {
+class ProblemController extends \BaseController {
 
+	public function getIndex() {
+		return View::make('layouts.problems.list', array('pagetitle' => 'Problem List'));
+	}
 
-	// Followings are for /resource/news
+	// Followings are for /resource/problem
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -11,7 +14,9 @@ class NewsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		// for datatables
+		$problems = Problem::select(array('pid', 'title', 'source', 'total_ac', 'total_submit', 'vacnum', 'vtotalnum', 'vacpnum', 'vtotalpnum', 'vname', 'vid'))->public();
+		return Datatables::of($problems)->add_column('user_stat', '{{ Auth::user()->isProblemAccepted($pid) ? "Yes" : (Auth::user()->isProblemSubmitted($pid) ? "No" : "") }}', 0)->make();
 	}
 
 	/**
@@ -42,7 +47,7 @@ class NewsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return News::findOrFail($id)->toJson();
+		//
 	}
 
 	/**

@@ -38,16 +38,17 @@ return array(
 		'provider/assets/javascripts',
 		'provider/assets/stylesheets',
 		'provider/assets/images',
+		'vendor/assets/javascripts',
+		'vendor/assets/stylesheets',
+		'vendor/assets/images',
 
 		'components/jquery',
 		'components/bootstrap',
 		'components/form',
 		'components/underscore',
 
-		'vendor/datatables/datatables',
+		'vendor/assets/DataTables-1.9.4',
 		'vendor/moment/moment',
-		'vendor/assets/javascripts',
-		'vendor/assets/stylesheets',
 	),
 
 	/*

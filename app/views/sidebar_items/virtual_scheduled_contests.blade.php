@@ -4,7 +4,7 @@
     <h3>Upcoming Virtual Contests</h3>
     <p>
         @foreach ($contests as $contest)
-            <a href='contest/{{ $contest->cid }}'>{{ $contest->title }}</a> at {{ $contest->start_time }}<br />
+            <a href='contest/{{ $contest->cid }}'>{{ $contest->title }}</a> at <span class='display_time'>{{ $contest->start_time }}</span><br />
         @endforeach
     </p>
 @endif

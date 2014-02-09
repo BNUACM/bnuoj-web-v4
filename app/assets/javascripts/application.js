@@ -14,10 +14,13 @@
 //= require js/bootstrap
 //= require underscore
 //= require moment
-//= require media/js/jquery.dataTables
+//= require jquery.history
+//= require jquery.dataTables
+//= require datatables-bootstrap3
+//= require datatables.plugins
 //= require jquery.form
 //= require helpers
 //= require base_class
 //= require views/base_view
-//= require views/home_view
+//= require_tree views
 //= require bootstrap

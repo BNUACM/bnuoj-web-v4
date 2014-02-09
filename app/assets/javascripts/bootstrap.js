@@ -1,13 +1,14 @@
 $(document).ready(function() {
     var viewRoutes = {
-        "^/$": "HomeView"
+        "^/$"                       : "HomeView",
+        "^/problem(/?)$"            : "ProblemListView"
     };
 
-    _.each(viewRoutes, function(viewName, route) {
-        if (window.location.pathname.match(route)) {
-            window.currentView = new window[viewName];
-        }
+    // find first matching route
+    var viewName = _.find(viewRoutes, function(viewName, route) {
+        return window.location.pathname.match(route);
     });
 
+    currentView = new window[viewName];
     currentView.start();
 });

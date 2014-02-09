@@ -9,7 +9,7 @@
                 <div style="margin-bottom:10px">by <b id="snauthor"></b> <span id="sntime"></span></div>
                 <div id="sncontent"></div>
             </div>
-@if (Auth::check() && Auth::user()->isAdmin())
+@if (Auth::check() && Auth::user()->is_admin)
             <div class="modal-footer">
                 <a class="newseditbutton btn btn-primary" name="" href="">Edit</a>
             </div>

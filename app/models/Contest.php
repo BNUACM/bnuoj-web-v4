@@ -7,7 +7,7 @@ class Contest extends Eloquent {
     public $timestamps = false;
 
     protected $hidden = array('password', 'allp');
-    protected $appends = array('is_running', 'final_time');
+    protected $appends = array('final_time');
 
     // add for eager loading relations
     public function statuses() {
@@ -35,33 +35,40 @@ class Contest extends Eloquent {
     }
 
     // add custom attributes
+    public function getFinalTimeAttribute() {
+        if ($this->hasCha) return $this->challenge_end_time;
+        return $this->end_time;
+    }
+
     public function getIsChallengingAttribute() {
         if ($this->hasCha) return false;
-        return time() > strtotime($this->attributes["challenge_start_time"]) && time() < strtotime($this->attributes["challenge_end_time"]);
+        return time() > strtotime($this->challenge_start_time) && time() < strtotime($this->challenge_end_time);
     }
 
     public function getIsCodingAttribute() {
         if ($this->hasCha) return false;
-        return time() > strtotime($this->attributes["start_time"]) && time() < strtotime($this->attributes["end_time"]);
+        return time() > strtotime($this->start_time) && time() < strtotime($this->end_time);
     }
 
     public function getIsIntermissionAttribute() {
         if ($this->hasCha) return false;
-        return time() > strtotime($this->attributes["end_time"]) && time() < strtotime($this->attributes["challenge_start_time"]);
+        return time() > strtotime($this->end_time) && time() < strtotime($this->challenge_start_time);
+    }
+
+    public function getIsStartedAttribute() {
+        return time() > strtotime($this->start_time);
     }
 
     public function getIsRunningAttribute() {
-        if ($this->hasCha) return $this->isCoding || $this->isIntermission || $this->isChallenging;
-        return $this->isCoding;
+        return time() > strtotime($this->start_time) && time() < strtotime($this->final_time);
     }
 
-    public function getFinalTimeAttribute() {
-        if ($this->hasCha) return $this->attributes["challenge_end_time"];
-        return $this->attributes["end_time"];
+    public function getIsEndedAttribute() {
+        return time() > strtotime($this->final_time);
     }
 
     public function getReportAttribute($value) {
-        if ($this->isRunning) return "";
+        if (!$this->isEnded && (!Auth::check() || !Auth::user()->isAdmin())) return "";
         return $value;
     }    
 

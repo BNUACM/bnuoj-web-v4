@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    'debug' => true,
+    'debug' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -113,7 +113,7 @@ return array(
         // console: https://github.com/darsain/laravel-console
         // 'Darsain\Console\ConsoleServiceProvider',
         
-        // datatable-bundle
+        // datatable-bundle: https://github.com/bllim/laravel4-datatables-package
         'Bllim\Datatables\DatatablesServiceProvider',
 
     ),

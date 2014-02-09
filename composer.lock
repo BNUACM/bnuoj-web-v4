@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b91f96b5d7f089e53f20b2e86a7f0396",
+    "hash": "524d540afa2564a4b8ca0e934a31c7d6",
     "packages": [
         {
             "name": "bllim/datatables",
@@ -429,29 +429,6 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "time": "2014-01-17 12:21:18"
-        },
-        {
-            "name": "datatables/datatables",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DataTables/DataTables.git",
-                "reference": "87e0d43844bcaae6e77fcdea3f24991e266cae06"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/87e0d43844bcaae6e77fcdea3f24991e266cae06",
-                "reference": "87e0d43844bcaae6e77fcdea3f24991e266cae06",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
-            "homepage": "http://www.datatables.net/",
-            "time": "2014-02-05 14:02:23"
         },
         {
             "name": "filp/whoops",
@@ -2225,7 +2202,6 @@
         "codesleeve/asset-pipeline": 20,
         "components/jquery": 20,
         "components/underscore": 20,
-        "datatables/datatables": 20,
         "bllim/datatables": 20,
         "moment/moment": 20,
         "malsup/form": 20

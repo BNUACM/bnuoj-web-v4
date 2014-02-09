@@ -5,11 +5,11 @@
     <meta name="description" content="BNU Online Judge, A simple, full-featured Online Judge." />
     <meta name="keywords" content="Online Judge, BNU, OJ, BNUOJ, BOJ, Virtual Judge, Replay Contest, Problem Category" />
     <meta name="author" content="51isoft">
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <title>{{{ $pagetitle or "BNU Online Judge" }}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        var currentTime = '{{ time() }}';
+        var currentServerTimeStamp = {{ time() }};
         var globalConfig = ({{ json_encode(Config::get('js_global_config')) }});
     </script>
     <?= stylesheet_link_tag() ?>
@@ -23,10 +23,10 @@
 @include("layouts.navbar")
     <marquee class="hidden-xs" direction="left" behavior="alternate" scrollamount="2" style="position:absolute;width:100%;"></marquee>
     <div class="hidden-xs" id="marqueepos"></div>
-    <div class="container" id="page-content">
-        <div class="row">
+    <div class="container">
+        <div id="page-content">
 @yield('layout')
-        </div>    
+        </div>
         <hr />
         <footer id="footer">
             <p>

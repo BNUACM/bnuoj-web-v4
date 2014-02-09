@@ -10,7 +10,7 @@
             <a class="navbar-brand" href="{{ route('index') }}">BNUOJ</a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav" id="nav">
+            <ul class="nav navbar-nav" id="main_navbar">
                 <li class="dropdown" id="problem">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="problem.php">Problem <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -30,14 +30,14 @@
                         <li id="vcontest"><a href="contest.php?virtual=1">Virtual Contests</a></li>
                     </ul>
                 </li>
-                <li id="ranklist"><a href="ranklist.php">Ranklist</a></li>
-                <li id="discuss"><a href="discuss.php">Discuss</a></li>
                 <li class="dropdown" id="more">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="teaminfo.php">More... <b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="teaminfo.php">More <b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        <li><a href="ranklist.php">Ranklist</a></li>
+                        <li><a href="discuss.php">Discuss</a></li>
                         <li><a href="news.php">News</a></li>
+                        <li class="divider"></li>
                         <li><a href="teaminfo.php">Our Team</a></li>
-                        <li><a href="http://www.oiegg.com/forumdisplay.php?fid=407" target="_blank">BBS</a></li>
                         <li class="divider"></li>
                         <li><a href="recent_contest.php">Recent Contests</a></li>
                         <li class="divider"></li>
@@ -55,19 +55,19 @@
                 <li class="dropdown" id="userspace">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="/user/{{{ Auth::user()->username }}}" id="displayname">
                         {{{ Auth::user()->username }}}
-                        @if (Auth::user()->unreadMessageCount() > 0)
-                        <b style='color:#F00'> ({{ Auth::user()->unreadMessageCount() }}) <b class="caret"></b></a>
+                        @if (Auth::user()->unread_message_count > 0)
+                        <b style='color:#F00'> ({{ Auth::user()->unread_message_count }}) <b class="caret"></b></a>
                         @endif
                     <ul class="dropdown-menu">
                         <li><a href="/user/{{{ Auth::user()->username }}}">Show My Information</a></li>
                         <li><a href="#" id="modify" data-toggle="modal" data-target="#modifydialog">Modify My Information</a></li>
                         <li><a href="mail.php" id="mail">
                             Mail
-                            @if (Auth::user()->unreadMessageCount() > 0)
-                            <b style='color:#F00'> ({{ Auth::user()->unreadMessageCount() }}) <b class="caret"></b></a>
+                            @if (Auth::user()->unread_message_count > 0)
+                            <b style='color:#F00'> ({{ Auth::user()->unread_message_count }}) <b class="caret"></b></a>
                             @endif
                         </a></li>
-    @if (Auth::user()->isAdmin())
+    @if (Auth::user()->is_admin)
                         <li><a href="admin_index.php" id="admin">Administration</a></li>
     @endif
                         <li id="logoutbutton"><a href="{{ route('logout') }}" id="logout">Logout</a></li>

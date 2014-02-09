@@ -27,13 +27,14 @@ class UserController extends \BaseController {
     }
 
     public function logout() {
-        if (!Auth::check()) {
-            return Response::make(null, 403);
+        if (Auth::check()) {
+            Auth::logout();
         }
-        Auth::logout();
+        
         return Redirect::intended('/');
     }
 
+    // Followings are for /resource/user
     /**
      * Display a listing of the resource.
      *

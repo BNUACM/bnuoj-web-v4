@@ -1,5 +1,10 @@
 (function($) {
     BaseView = BaseClass.extend({
+
+        // View events
+        // format: "event selector": "handler"
+        // if selector contains spaces, we'll create a delegated event from first pattern
+        // for details, please refer https://learn.jquery.com/events/event-delegation/
         events: {
             "shown.bs.modal #regdialog": "onRegisterModalShown",
             "shown.bs.modal #logindialog": "onLoginModalShown",
@@ -17,41 +22,75 @@
             NEWS_MODAL: "#newsshowdialog",
             AJAX_FORM_BTNS: "input:submit, button:submit, .btn",
             AJAX_FORM_MSG: "#msgbox",
-            NAVBAR: "#nav"
+            DISPLAY_TIME: ".display_time",
+            MAIN_NAVBAR: "#main_navbar"
         },
 
-        formValidationHtml: '<img style="height:20px" src="assets/ajax-loader.gif" /> Validating....',
+        ajaxLoadingHtml: '<img style="height:20px" src="assets/ajax-loader.gif" /> Loading....',
         activeNavbar: null,
 
         start: function() {
-            this.beforeAll();
+            this.prepare();
             this.tickNavTime();
             this.setupAjaxForms();
-            this.bindEvents();
+            this.convertDisplayTime();
             this.setActiveNavbar();
-            this.run();
+            this.beforeRender();
+            this.render();
+            this.afterRender();
+            this.bindEvents();
         },
 
         setActiveNavbar: function() {
             if (!this.activeNavbar) return;
-            $(this.activeNavbar, this._selectors.NAVBAR).addClass("active");
+            $(this.activeNavbar, this._selectors.MAIN_NAVBAR).addClass("active");
         },
 
-        beforeAll: function() {
+        // should be overwrite by inherited class
+        prepare: function() {
 
         },
 
+        convertDisplayTime: function() {
+            $(this._selectors.DISPLAY_TIME).each(function() {
+                var time = $(this).text();
+                $(this).text(Helpers.getLocalTime(time));
+            });
+        },
+
+        /**
+         * Bind delegated events
+         * https://learn.jquery.com/events/event-delegation/
+         */
         bindEvents: function() {
             var self = this;
             _.each(this.events, function(func, evt) {
                 var result = evt.match(/([^ ]*) (.*)/);
-                $(result[2]).on(result[1], function() {
-                    self[func].apply(self, arguments);
-                });
+                if (result[2].indexOf(' ') == -1) {
+                    $(result[2]).on(result[1], function() {
+                        self[func].apply(self, arguments);
+                    });
+                } else {
+                    var doms = result[2].match(/([^ ]*) (.*)/);
+                    $(doms[1]).on(result[1], doms[2], function() {
+                        self[func].apply(self, arguments);
+                    });
+                }
             })
         },
 
-        run: function() {
+        // should be overwrite by inherited class
+        beforeRender: function() {
+
+        },
+
+        // should be overwrite by inherited class
+        render: function() {
+
+        },
+
+        // should be overwrite by inherited class
+        afterRender: function() {
 
         },
 
@@ -98,7 +137,7 @@
                 },
                 beforeSubmit: function (formData, tform, options) {
                     $(self._selectors.AJAX_FORM_BTNS, tform).attr("disabled", "disabled").addClass("disabled");
-                    $(self._selectors.AJAX_FORM_MSG, tform).removeClass().addClass('alert alert-info').html(self.formValidationHtml).fadeIn(500);
+                    $(self._selectors.AJAX_FORM_MSG, tform).removeClass().addClass('alert alert-info').html(self.ajaxLoadingHtml).fadeIn(500);
                     return true;
                 },
                 success: function(responseJSON, statusText, xhr, form) {

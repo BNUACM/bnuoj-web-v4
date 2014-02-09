@@ -58,6 +58,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->email;
     }
 
+    // add for eager loading relations
     public function statuses() {
         return $this->hasMany('Status', 'username', 'username');
     }
@@ -74,16 +75,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('ContestClarify', 'username', 'username');
     }
 
-    /**
-     * Get whether this user is Admin
-     * @return boolean
-     */
-    public function isAdmin() {
+    // add custom attributes
+    public function getIsAdminAttribute() {
         return ($this->isroot == 1);
     }
 
-    public function unreadMessageCount() {
+    public function getUnreadMessageCountAttribute() {
         return $this->inMessages()->whereStatus('0')->count();
+    }
+
+    // other functions
+    public function isProblemAccepted($pid) {
+        return ($this->statuses()->accepted()->wherePid($pid)->count() > 0);
+    }
+
+    public function isProblemSubmitted($pid) {
+        return ($this->statuses()->wherePid($pid)->count() > 0);
     }
 
 }

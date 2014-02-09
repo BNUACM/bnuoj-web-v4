@@ -11,6 +11,6 @@
  *
  *= require css/bootstrap
  *= require css/bootstrap-theme
- *= require media/css/jquery.dataTables
+ *= require datatables-bootstrap3
  *= require bnuoj
  */
