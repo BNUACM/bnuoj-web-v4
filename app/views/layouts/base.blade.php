@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="BNU Online Judge, A simple, full-featured Online Judge." />
     <meta name="keywords" content="Online Judge, BNU, OJ, BNUOJ, BOJ, Virtual Judge, Replay Contest, Problem Category" />
     <meta name="author" content="51isoft">
@@ -14,9 +15,9 @@
     </script>
     <?= stylesheet_link_tag() ?>
     <?= javascript_include_tag() ?>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="{{ url('assets/respond.min.js') }}"></script>
     <![endif]-->
 </head>
 <body>

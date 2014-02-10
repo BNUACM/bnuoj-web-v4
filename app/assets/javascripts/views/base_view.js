@@ -26,7 +26,7 @@
             MAIN_NAVBAR: "#main_navbar"
         },
 
-        ajaxLoadingHtml: '<img style="height:20px" src="assets/ajax-loader.gif" /> Loading....',
+        ajaxLoadingHtml: '<img style="height:20px" src="' + globalConfig.misc.base_path + 'assets/ajax-loader.gif" /> Loading....',
         activeNavbar: null,
 
         start: function() {
@@ -37,8 +37,8 @@
             this.setActiveNavbar();
             this.beforeRender();
             this.render();
-            this.afterRender();
             this.bindEvents();
+            this.afterRender();
         },
 
         setActiveNavbar: function() {
@@ -114,12 +114,12 @@
         onShowNews: function(evt) {
             var nnid = $(evt.target).attr("name");
             var self = this;
-            $.get("resource/news/" + nnid, { 'rand': Math.random() }).done(function(data) {
+            $.get(globalConfig.misc.base_path + "resource/news/" + nnid, { 'rand': Math.random() }).done(function(data) {
                 var gval = $.parseJSON(data);
                 $("#sntitle", self._selectors.NEWS_MODAL).html(gval.title);
                 $("#sncontent", self._selectors.NEWS_MODAL).html(gval.content);
                 $("#sntime", self._selectors.NEWS_MODAL).html(gval.time_added);
-                $("#snauthor", self._selectors.NEWS_MODAL).html("<a href='userinfo.php?name=" + gval.author + "'>" + gval.author + "</a>");
+                $("#snauthor", self._selectors.NEWS_MODAL).html("<a href='" + globalConfig.misc.base_path + "user/" + gval.author + "'>" + gval.author + "</a>");
                 $(".newseditbutton", self._selectors.NEWS_MODAL).attr("name", gval.newsid);
                 $("#ntitle", self._selectors.NEWS_MODAL).html(gval.title);
                 $(self._selectors.NEWS_MODAL).modal("show");

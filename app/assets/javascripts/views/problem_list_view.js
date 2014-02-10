@@ -1,107 +1,155 @@
 (function($) {
-    ProblemListView = BaseView.extend({
+    ProblemListView = DatatableHistoryView.extend({
         events: _.extend({
             "click #problist a.source_search": "clickSource",
-            "page #problist": "updateUrl",
-            "filter #problist": "updateUrl"
-        }, BaseView.prototype.events),
+            "click .unsolved-btns .btn": "changeUnsolved",
+            "click .stat-btns .btn": "changeShownStat",
+            "change #selectoj": "changeOJSelector"
+        }, DatatableHistoryView.prototype.events),
 
         _selectors: _.extend({
-            PROBLEM_LIST: "#problist",
-            SEARCH_INPUT: "#problist_filter input[type=search]"
-        }, BaseView.prototype._selectors),
+            DATATABLE: "#problist",
+            SEARCH_INPUT: "#problist_filter input[type=search]",
+            OJ_SELECTOR: "#selectoj",
+            UNSOLVED_BTNS: ".unsolved-btns .btn",
+            STAT_BTNS: ".stat-btns .btn"
+        }, DatatableHistoryView.prototype._selectors),
 
         activeNavbar: "#problem",
 
-        isRendering: false,
+        isPoppingState: false,
+        isPushingState: false,
+        withSearchBar: true,
 
-        listTable: null,
-        currentInfo: {
-            page: null,
-            searchString: null,
+        currentInfo: _.extend({
             OJ: null,
             shownStat: null,
             unsolveCheck: null,
-        },
+        }, DatatableHistoryView.prototype.currentInfo),
 
         parseUrlParams: function(url) {
             url = url || window.location.href;
-            this.currentInfo.page = parseInt(Helpers.getUrlParam('page', url) || "1");
-            if (_.isNaN(this.currentInfo.page)) this.currentInfo.page = 1;
-            this.currentInfo.searchString = Helpers.getUrlParam('searchstr', url) || "";
             this.currentInfo.unsolveCheck = Helpers.getUrlParam('unsolved', url) || "0";
             this.currentInfo.shownStat = Helpers.getUrlParam('stat', url) || "0";
             this.currentInfo.OJ = Helpers.getUrlParam('oj', url) || "";
         },
 
-        beforeRender: function() {
-            this.parseUrlParams();
+        filterStateInfo: function(info) {
+            if (info.OJ != this.currentInfo.OJ) {
+                $(this._selectors.OJ_SELECTOR).val(info.OJ).trigger('change');
+            }
+
+            if (info.shownStat != this.currentInfo.shownStat) {
+                $(this._selectors.STAT_BTNS).filter('[stat=' + info.shownStat + ']').click();
+            }
+
+            if (info.unsolveCheck != this.currentInfo.unsolveCheck) {
+                $(this._selectors.UNSOLVED_BTNS).filter('[unsolved=' + info.unsolveCheck + ']').click();
+            }
         },
 
-        changeState: function() {
-            var state = History.getState();
-            this.parseUrlParams(state.hash);
-            this.listTable.fnPageChange(state.data.info.page - 1);
-            this.listTable.fnFilter(state.data.info.searchString);
-            $(this._selectors.SEARCH_INPUT).val(state.data.info.searchString)
+        afterRenderView: function() {
+            if (this.currentInfo.OJ != "") {
+                $(this._selectors.OJ_SELECTOR).val(this.currentInfo.OJ).trigger('change');
+            }
+            $(this._selectors.STAT_BTNS).filter('[stat=' + this.currentInfo.shownStat + ']').click();
+            $(this._selectors.UNSOLVED_BTNS).filter('[unsolved=' + this.currentInfo.unsolveCheck + ']').addClass('active');
         },
 
-        afterRender: function(evt) {
-            var self = this;
-            History.Adapter.bind(window, 'statechange', function(){
-                self.changeState();
-            });
+        changeShownStat: function(evt) {
+            if ($(evt.target).hasClass('active')) return;
+            this.currentInfo.shownStat = $(evt.target).attr('stat');
+            $(this._selectors.STAT_BTNS).removeClass('active');
+            $(evt.target).addClass('active')
+
+            if (this.currentInfo.shownStat == "0") {
+                this.listTable.fnSetColumnVis( 6, false, false );
+                this.listTable.fnSetColumnVis( 7, false, false );
+                this.listTable.fnSetColumnVis( 8, false, false );
+                this.listTable.fnSetColumnVis( 9, false, false );
+                this.listTable.fnSetColumnVis( 4, true, false );
+                this.listTable.fnSetColumnVis( 5, true, false );
+            }
+            else if (this.currentInfo.shownStat == "1") {
+                this.listTable.fnSetColumnVis( 4, false, false );
+                this.listTable.fnSetColumnVis( 5, false, false );
+                this.listTable.fnSetColumnVis( 8, false, false );
+                this.listTable.fnSetColumnVis( 9, false, false );
+                this.listTable.fnSetColumnVis( 6, true, false );
+                this.listTable.fnSetColumnVis( 7, true, false );
+            }
+            else if (this.currentInfo.shownStat == "2") {
+                this.listTable.fnSetColumnVis( 6, false, false );
+                this.listTable.fnSetColumnVis( 7, false, false );
+                this.listTable.fnSetColumnVis( 4, false, false );
+                this.listTable.fnSetColumnVis( 5, false, false );
+                this.listTable.fnSetColumnVis( 8, true, false );
+                this.listTable.fnSetColumnVis( 9, true, false );
+            }
+            if (!this.isPoppingState) this.updateUrl();
+
+            evt.preventDefault();
+        },
+
+        changeUnsolved: function(evt) {
+            if ($(evt.target).hasClass('active')) return;
+            this.currentInfo.unsolveCheck = $(evt.target).attr('unsolved');
+            $(this._selectors.UNSOLVED_BTNS).removeClass('active');
+            $(evt.target).addClass('active')
+            this.listTable.fnReloadAjax();
+            evt.preventDefault();
+        },
+
+        changeOJSelector: function(evt) {
+            this.currentInfo.OJ = $(evt.target).val();
+            // potential bug (feature?) caused by laravel datatable package, should be 10th column
+            // reason is, Flag (user_stat) is appended afterwards
+            // keep that in mind
+            this.listTable.fnFilter(this.currentInfo.OJ, 9);
+            evt.preventDefault();
         },
 
         clickSource: function(evt) {
+            this.currentInfo.searchString = $(evt.target).text();
+            $(this._selectors.SEARCH_INPUT).val(this.currentInfo.searchString);
+            this.listTable.fnFilter(this.currentInfo.searchString);
+            evt.preventDefault();
         },
 
-        updateUrl: function() {
-            if (this.isRendering || !this.listTable) return;
-            this.currentInfo.page = this.listTable.fnPagingInfo().iPage + 1;
-            this.currentInfo.searchString = $(this._selectors.SEARCH_INPUT).val();
+        getCurrentTitle: function() {
+            return "Problem List";
+        },
 
-            var url = (this.currentInfo.OJ == "" ? "" : "&oj=" + this.currentInfo.OJ) +
+        getViewUrl: function() {
+            return (this.currentInfo.OJ == "" ? "" : "&oj=" + this.currentInfo.OJ) +
                     (this.currentInfo.unsolveCheck == "0" ? "" : "&unsolved=" + this.currentInfo.unsolveCheck) +
-                    (this.currentInfo.shownStat == "0" ? "" : "&stat=" + this.currentInfo.shownStat) +
-                    (this.currentInfo.page == 1 ? "" : "&page=" + this.currentInfo.page) +
-                    (this.currentInfo.searchString == "" ? "" : "&searchstr=" + encodeURIComponent(this.currentInfo.searchString));
-
-            if (url != "") url = "?" + url.substr(1);
-            History.pushState({'info': this.currentInfo}, "Problem List", url);
+                    (this.currentInfo.shownStat == "0" ? "" : "&stat=" + this.currentInfo.shownStat);
         },
 
-        render: function() {
-            this.generateListTable();
+        renderView: function() {
         },
 
-        generateListTable: function() {
-            var self = this;
-            this.listTable = $(this._selectors.PROBLEM_LIST).dataTable({
-                "bProcessing": true,
-                "bServerSide": true,
-                "sDom": '<"row"<"col-sm-12"pf>r<"table-responsive"t><"col-sm-9"i><"col-sm-3"l>>',
+        addAjaxParams: function(aoData) {
+            aoData.push({"name" : 'unsolved', "value" : this.currentInfo.unsolveCheck});
+        },
+
+        afterTableDrawn: function() {
+        },
+
+        setupTableOptions: function() {
+            this.tableOptions = ({
+                "sDom": '<"row"<"col-sm-5"f><"col-sm-7"p>r<"table-responsive"t><"col-sm-9"i><"col-sm-3"l>>',
                 "oLanguage": {
                     "sEmptyTable": "No problems found.",
                     "sZeroRecords": "No problems found.",
                     "sInfoEmpty": "No entries to show"
                 },
-                "sAjaxSource": "/resource/problem",
-                "fnServerParams": function(aoData) {
-                    // set isRendering before ajax call
-                    self.isRendering = true;
-                    // stop previous ajax, a little bit hacky
-                    if (this.fnSettings().jqXHR) this.fnSettings().jqXHR.abort();
-
-                    aoData.push({"name" : 'unsolved', "value" : self.currentInfo.unsolveCheck});
-                },
+                "sAjaxSource": globalConfig.misc.base_path + "resource/problem",
                 "aaSorting": [ [ 1, 'asc'] ],
                 "sPaginationType": "bs_full",
                 "aLengthMenu": [[25, 50, 100, 150, 200], [25, 50, 100, 150, 200]] ,
                 "iDisplayLength": globalConfig.limits.problems_per_page,
                 "iDisplayStart": (this.currentInfo.page - 1) * globalConfig.limits.problems_per_page,
-                
-                "oSearch": {"sSearch": self.currentInfo.searchString},
                 "aoColumnDefs": [
                     { "sWidth": "65px", "aTargets": [ 10 ] },
                     { "sWidth": "55px", "aTargets": [ 0, 1, 4, 5, 6, 7, 8, 9, 11 ] },
@@ -139,18 +187,15 @@
                     },
                     {
                         "mRender": function ( data, type, full ) {
+                            data = $.trim(data);
                             if (data == "Yes") return "<span class='ac'>" + data + "</span>";
                             if (data == "No") return "<span class='wa'>" + data + "</span>";
                             return data;
                         },
                         "aTargets": [ 0 ]
                     }
-                ],
-                "fnDrawCallback": function() {
-                    self.isRendering = false;
-                }
-            }).fnSetFilteringDelay();
+                ]
+            });
         }
-        
     });
 }).call(this, jQuery);

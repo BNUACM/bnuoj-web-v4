@@ -11,13 +11,16 @@
 |
 */
 
-Route::get('/', array('as' => 'index', 'uses' => 'HomeController@index'));
-Route::post('/login', array('as' => 'login', 'uses' => 'UserController@login'));
-Route::get('/logout', array('as' => 'logout', 'uses' => 'UserController@logout'));
-Route::get('/timestamp', 'HomeController@serverTime');
+Route::get('', array('as' => 'index', 'uses' => 'HomeController@index'));
+Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
+Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'));
+Route::get('timestamp', 'HomeController@serverTime');
 
-Route::resource('/resource/user', 'UserController');
-Route::resource('/resource/news', 'NewsController');
-Route::resource('/resource/contest', 'ContestController');
-Route::resource('/resource/problem', 'ProblemController');
-Route::controller('/problem', 'ProblemController');
+Route::resource('resource/user', 'UserController');
+Route::resource('resource/news', 'NewsController');
+Route::resource('resource/contest', 'ContestController');
+Route::resource('resource/problem', 'ProblemController');
+Route::resource('resource/status', 'StatusController');
+
+Route::controller('problem', 'ProblemController');
+Route::controller('status', 'StatusController');

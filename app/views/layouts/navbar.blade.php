@@ -12,14 +12,14 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav" id="main_navbar">
                 <li class="dropdown" id="problem">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="problem.php">Problem <b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('problem') }}">Problem <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li id="localp"><a href="problem.php#oj=BNU">Local Problems</a></li>
-                        <li id="allp"><a href="problem.php">All Problems</a></li>
+                        <li id="localp"><a href="{{ url('problem?oj=BNU') }}">Local Problems</a></li>
+                        <li id="allp"><a href="{{ url('problem') }}">All Problems</a></li>
                         <li id="categoryp"><a href="problem_category.php">Problem Category</a></li>
                     </ul>
                 </li>
-                <li id="status"><a href="status.php">Status</a></li>
+                <li id="status"><a href="{{ url('status') }}">Status</a></li>
                 <li class="dropdown" id="contest">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="contest.php?type=50">Contest <b class="caret"></b></a>
                     <ul class="dropdown-menu">

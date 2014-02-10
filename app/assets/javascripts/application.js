@@ -22,5 +22,6 @@
 //= require helpers
 //= require base_class
 //= require views/base_view
+//= require views/datatable_history_view
 //= require_tree views
 //= require bootstrap

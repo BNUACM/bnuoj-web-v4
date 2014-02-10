@@ -19,5 +19,12 @@ class Problem extends Eloquent {
     public function scopePublic($query) {
         return $query->whereHide(0);
     }
+
+    public function scopeUserUnsolved($query) {
+        if (!Auth::check()) {
+            return $query;
+        }
+        return $query->whereRaw('pid NOT IN (SELECT DISTINCT(pid) FROM status WHERE result = "Accepted" AND username = ?) ', array(Auth::user()->username));
+    }
 }
 

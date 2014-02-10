@@ -1,7 +1,8 @@
 $(document).ready(function() {
     var viewRoutes = {
         "^/$"                       : "HomeView",
-        "^/problem(/?)$"            : "ProblemListView"
+        "^/problem(/?)$"            : "ProblemListView",
+        "^/status(/?)$"            : "StatusListView"
     };
 
     // find first matching route

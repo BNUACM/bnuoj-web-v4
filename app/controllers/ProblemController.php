@@ -2,85 +2,100 @@
 
 class ProblemController extends \BaseController {
 
-	public function getIndex() {
-		return View::make('layouts.problems.list', array('pagetitle' => 'Problem List'));
-	}
+    public function getIndex() {
+        return View::make('layouts.problems.list', array('pagetitle' => 'Problem List'));
+    }
 
-	// Followings are for /resource/problem
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		// for datatables
-		$problems = Problem::select(array('pid', 'title', 'source', 'total_ac', 'total_submit', 'vacnum', 'vtotalnum', 'vacpnum', 'vtotalpnum', 'vname', 'vid'))->public();
-		return Datatables::of($problems)->add_column('user_stat', '{{ Auth::user()->isProblemAccepted($pid) ? "Yes" : (Auth::user()->isProblemSubmitted($pid) ? "No" : "") }}', 0)->make();
-	}
+    // Followings are for /resource/problem
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        // return Problem::userUnsolved()->public()->take(1)->get()->toJson();
+        // for datatables
+        $problems = Problem::select(array('pid', 'title', 'source', 'total_ac', 'total_submit', 'vacnum', 'vtotalnum', 'vacpnum', 'vtotalpnum', 'vname', 'vid'))->public();
+        if (Input::get('unsolved') == '1') {
+            $problems = $problems->userUnsolved();
+        }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+        // use unsolved param to reduce SQL
+        return Datatables::of($problems)->add_column('user_stat', '
+                                                        @if (Auth::check())
+                                                            {{ "" }}
+                                                            @if (Input::get("unsolved") != "1" && Auth::user()->isProblemAccepted($pid))
+                                                                {{ "Yes" }}
+                                                            @elseif (Auth::user()->isProblemSubmitted($pid))
+                                                                {{ "No" }}
+                                                            @endif
+                                                        @endif
+                                                        ', 0)->make();
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        //
+    }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        //
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 
 }

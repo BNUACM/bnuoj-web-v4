@@ -1,40 +1,11 @@
 <?php
 
-class UserController extends \BaseController {
+class StatusController extends \BaseController {
 
-    /**
-     * Initialize
-     */
-    public function __construct() {
-        $this->beforeFilter('csrf', array('on' => 'post'));
+    public function getIndex() {
+        return View::make('layouts.statuses.list', array('pagetitle' => 'Status List'));
     }
 
-    /**
-     * User login
-     * @return Response 200 or 403
-     */
-    public function login() {
-        $hashedPassword = OJLib::hashPassword(Input::get('password'));
-        $remember = Input::get('cksave');
-
-        $user = User::whereUsername(Input::get('username'))->wherePassword($hashedPassword)->get()->first();
-        if ($user) {
-            Auth::login($user, $remember);
-            return Response::json(array('msg' => 'Logged in.'));
-        } else {
-            return Response::json(array('msg' => 'Username or password doesn\'t match.'), 403);
-        }
-    }
-
-    public function logout() {
-        if (Auth::check()) {
-            Auth::logout();
-        }
-        
-        return Redirect::back();
-    }
-
-    // Followings are for /resource/user
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +13,23 @@ class UserController extends \BaseController {
      */
     public function index()
     {
-        //
+        // TODO: investigate
+        // following scope causes performance problem in local, need more testing
+        // $statuses = Status::select(array('username', 'runid', 'pid', 'result', 'language', 'time_used', 'memory_used', 'source', 'time_submit', 'isshared'))->public();
+        
+        $statuses = Status::select(array('username', 'runid', 'pid', 'result', 'language', 'time_used', 'memory_used', 'source', 'time_submit', 'isshared'));
+        return Datatables::of($statuses)
+            // length
+            ->edit_column('source', '{{ strlen($source) }}')
+            // visible
+            ->edit_column('isshared', '
+                          @if ($isshared == 1 || (Auth::check() && (Auth::user()->is_admin || strcasecmp(Auth::user()->username, $username) == 0)))
+                            1
+                          @else
+                            0
+                          @endif
+                          ')
+            ->make();
     }
 
     /**
@@ -108,4 +95,5 @@ class UserController extends \BaseController {
     {
         //
     }
+
 }

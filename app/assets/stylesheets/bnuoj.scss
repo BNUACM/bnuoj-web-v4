@@ -8,7 +8,7 @@ body {
 }
 
 // add margin to buttons
-#problist_wrapper {
+#problist_wrapper, #statuslist_wrapper {
     margin-top: 20px;
 }
 
@@ -19,28 +19,24 @@ body {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }   
-}
-
-#problist {
+        &.title { min-width: 162px;}
+        &.source { min-width: 120px;}
+    }
     .ac {
         color: blue !important;
         font-weight:bold;
     }
     .wa {color: red !important;}
-    .tle {color: red !important;}
-    .mle {color: red !important;}
-    .ole {color: red !important;}
-    .pe {color: red !important;}
-    .ce {color: green !important;}
-    .rf {color: black !important;}
-    .re {color: red !important;}
 }
 
-#problist {
-    th {
-        &.title { min-width: 162px;}
-        &.source { min-width: 120px;}
+#statuslist {
+    .ac {
+        color: blue !important;
+        font-weight:bold;
     }
-    
+    .wa, .tle, .mle, .pe, .re {
+        color: red !important;
+    }
+    .ce {color: green !important;}
+    .rf {color: black !important;}
 }

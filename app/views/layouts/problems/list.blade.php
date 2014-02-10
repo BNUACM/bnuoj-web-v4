@@ -4,15 +4,23 @@
     <div class="row">
         <div class="col-sm-12">
             @if (Auth::check())
-                <div class="btn-group">
-                    <button class="btn btn-info active" id="showall" unsolved='0'>All</button>
-                    <button class="btn btn-info" id="showunsolve" unsolved='1'>Unsolved</button>
+                <div class="btn-group unsolved-btns">
+                    <button class="btn btn-info active" unsolved='0'>All</button>
+                    <button class="btn btn-info" unsolved='1'>Unsolved</button>
                 </div>
             @endif
+            <div class="btn-group stat-btns">
+                <button class="btn btn-info" stat='0'>Local Stat</button>
+                <button class="btn btn-info" stat='1'>Remote Stat</button>
+                <button class="btn btn-info" stat='2'>Remote User Stat</button>
+            </div>
             <div class="btn-group">
-                <button class="btn btn-info active" id="showlocal" stat='0'>Local Stat</button>
-                <button class="btn btn-info" id="showremote" stat='1'>Remote Stat</button>
-                <button class="btn btn-info" id="showremu" stat='2'>Remote User Stat</button>
+                <select class="form-control" id="selectoj">
+                    <option value="">All</option>
+                    @foreach (OJInfo::all() as $oj)
+                        <option value="{{{ $oj->name }}}">{{{ $oj->name }}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>
@@ -31,7 +39,7 @@
                         <th>All</th>
                         <th>AC(U)</th>
                         <th>All(U)</th>
-                        <th class="selectoj">OJ</th>
+                        <th>OJ</th>
                         <th>VID</th>
                     </tr>
                 </thead>

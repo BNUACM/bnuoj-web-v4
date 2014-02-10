@@ -6,7 +6,7 @@
                 <h4 class="modal-title" id="registerModal">Register</h4>
             </div>
             {{ Form::open(array(
-                'url' => '/register',
+                'url' => 'register',
                 'id' => 'reg_form',
                 'class' => 'ajform form-horizontal',
                 'role' => 'form'
