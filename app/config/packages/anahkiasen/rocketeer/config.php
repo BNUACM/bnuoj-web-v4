@@ -56,6 +56,12 @@
 
 		// Stages configurations
 		'stages' => array(
+			'staging' => array(
+				'scm' => array('branch' => 'develop'),
+			),
+			'production' => array(
+				'scm' => array('branch' => 'master'),
+			),
 		),
 
 		// Connections configuration
