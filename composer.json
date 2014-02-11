@@ -11,7 +11,8 @@
 		"components/underscore": "dev-master",
 		"bllim/datatables": "dev-master",
 		"moment/moment": "dev-master",
-		"malsup/form": "dev-master"
+		"malsup/form": "dev-master",
+		"anahkiasen/rocketeer": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

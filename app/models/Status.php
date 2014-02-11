@@ -15,6 +15,10 @@ class Status extends Eloquent {
         return $this->belongsTo('User', 'username', 'username');
     }
 
+    public function languageName() {
+        return $this->hasOne('LanguageName', 'id', 'language');
+    }
+
     // add scopes
     public function scopeAccepted($query) {
         return $query->whereResult('Accepted');

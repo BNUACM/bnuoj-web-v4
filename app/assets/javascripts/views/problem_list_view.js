@@ -88,7 +88,6 @@
             }
             if (!this.isPoppingState) this.updateUrl();
 
-            evt.preventDefault();
         },
 
         changeUnsolved: function(evt) {
@@ -97,7 +96,6 @@
             $(this._selectors.UNSOLVED_BTNS).removeClass('active');
             $(evt.target).addClass('active')
             this.listTable.fnReloadAjax();
-            evt.preventDefault();
         },
 
         changeOJSelector: function(evt) {
@@ -106,14 +104,12 @@
             // reason is, Flag (user_stat) is appended afterwards
             // keep that in mind
             this.listTable.fnFilter(this.currentInfo.OJ, 9);
-            evt.preventDefault();
         },
 
         clickSource: function(evt) {
             this.currentInfo.searchString = $(evt.target).text();
             $(this._selectors.SEARCH_INPUT).val(this.currentInfo.searchString);
             this.listTable.fnFilter(this.currentInfo.searchString);
-            evt.preventDefault();
         },
 
         getCurrentTitle: function() {

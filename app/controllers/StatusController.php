@@ -13,11 +13,17 @@ class StatusController extends \BaseController {
      */
     public function index()
     {
-        // TODO: investigate
-        // following scope causes performance problem in local, need more testing
-        // $statuses = Status::select(array('username', 'runid', 'pid', 'result', 'language', 'time_used', 'memory_used', 'source', 'time_submit', 'isshared'))->public();
         
-        $statuses = Status::select(array('username', 'runid', 'pid', 'result', 'language', 'time_used', 'memory_used', 'source', 'time_submit', 'isshared'));
+        if (App::environment('local')) {
+            $statuses = Status::join('language_name', 'status.language', '=', 'language_name.id')
+                ->select(array('username', 'runid', 'pid', 'result', 'name', 'time_used', 'memory_used', 'source', 'time_submit', 'isshared'));
+        } else {
+            // TODO: investigate
+            // following scope causes performance problem in local, need more testing
+            $statuses = Status::join('language_name', 'status.language', '=', 'language_name.id')
+                ->select(array('username', 'runid', 'pid', 'result', 'language', 'time_used', 'memory_used', 'source', 'time_submit', 'isshared'))->public();
+        }
+        
         return Datatables::of($statuses)
             // length
             ->edit_column('source', '{{ strlen($source) }}')

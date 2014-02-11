@@ -72,8 +72,9 @@
                     });
                 } else {
                     var doms = result[2].match(/([^ ]*) (.*)/);
-                    $(doms[1]).on(result[1], doms[2], function() {
+                    $(doms[1]).on(result[1], doms[2], function(evt) {
                         self[func].apply(self, arguments);
+                        evt.preventDefault();
                     });
                 }
             })
@@ -124,7 +125,6 @@
                 $("#ntitle", self._selectors.NEWS_MODAL).html(gval.title);
                 $(self._selectors.NEWS_MODAL).modal("show");
             });
-            return false;
         },
 
         setupAjaxForms: function() {

@@ -72,7 +72,7 @@
         },
 
         afterTableDrawn: function() {
-            $(".dataTables_paginate .last").remove();
+            // $(".dataTables_paginate .last").parent().hide();
         },
 
         setupTableOptions: function() {
@@ -85,7 +85,6 @@
                 },
                 "sAjaxSource": globalConfig.misc.base_path + "resource/status",
                 "aaSorting": [ [1, 'desc'] ],
-                "sPaginationType": "bs_full",
                 "bLengthChange": false,
                 "iDisplayLength": globalConfig.limits.status_per_page,
                 "iDisplayStart": (this.currentInfo.page - 1) * globalConfig.limits.status_per_page,
@@ -108,7 +107,7 @@
                     },
                     {
                         "mRender": function ( data, type, full ) {
-                            if (data == "0" && full[6] == "0") {
+                            if (!data || (data == "0" && full[6] == "0")) {
                                 return "";
                             }
                             return data + " ms";
@@ -117,7 +116,7 @@
                     },
                     {
                         "mRender": function ( data, type, full ) {
-                            if (data == "0") {
+                            if (!data || data == "0") {
                                 return "";
                             }
                             return data + " KB";

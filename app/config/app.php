@@ -116,6 +116,9 @@ return array(
         // datatable-bundle: https://github.com/bllim/laravel4-datatables-package
         'Bllim\Datatables\DatatablesServiceProvider',
 
+        // rocketeer: https://github.com/Anahkiasen/rocketeer
+        'Rocketeer\RocketeerServiceProvider',   
+
     ),
 
     /*
@@ -183,6 +186,7 @@ return array(
         'View'            => 'Illuminate\Support\Facades\View',
 
         'Datatables'      => 'Bllim\Datatables\Datatables',
+        'Rocketeer'       => 'Rocketeer\Facades\Rocketeer',
     ),
 
 );
