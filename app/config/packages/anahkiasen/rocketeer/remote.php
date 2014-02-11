@@ -45,7 +45,9 @@
 		// a single command as a string or an array of commands
 		'callback' => function ($task, $file) {
 			return array(
-                sprintf('setfacl -R -m user:www-data:rwx,default:group:www-data:rwx "%s"', $file)
+				sprintf('sudo -S chmod -R 755 %s < ~/password.txt', $file),
+				sprintf('sudo -S chmod -R g+s %s < ~/password.txt', $file),
+				sprintf('sudo -S chown -R www-data:www-data %s < ~/password.txt', $file),
 			);
 		},
 

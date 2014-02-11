@@ -22,7 +22,9 @@
 	// Tasks to execute after the core Rocketeer Tasks
 	'after' => array(
 		'setup'   => array(),
-		'deploy'  => array(),
+		'deploy'  => array(
+		    'sudo -S service php5-fpm restart < ~/password.txt',
+		),
 		'cleanup' => array(),
 	),
 
