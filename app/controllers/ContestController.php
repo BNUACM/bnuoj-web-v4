@@ -2,6 +2,9 @@
 
 class ContestController extends \BaseController {
 
+	public function getShow($id) {
+		
+	}
 	/**
 	 * Display a listing of the resource.
 	 *

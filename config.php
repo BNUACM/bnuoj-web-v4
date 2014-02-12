@@ -64,13 +64,10 @@ $globalConfig["public"]["status"]["max_refresh_times"]          =   5;
 
 // other
 $globalConfig["public"]["misc"]["OJcode"]                       =   "BNU";
-$globalConfig["public"]["misc"]["base_url"]                     =   "http://localhost:8000/";
-$globalConfig["public"]["misc"]["base_path"]                    =   "/";
 $globalConfig["public"]["misc"]["server_timezone_offset"]       =   date('Z');
 $globalConfig["public"]["misc"]["datetime_format"]              =   "YYYY-MM-DD HH:mm:ss";
 $globalConfig["public"]["misc"]["cookie_prefix"]                =   "bnuoj_";
 
-$globalConfig["secret"]["misc"]["base_local_path"]              =   "/Library/WebServer/Documents/bnuoj/v4/";
 $globalConfig["secret"]["misc"]["salt_problem_in_contest"]      =   "[-,-]";
 $globalConfig["secret"]["misc"]["use_latex_render"]             =   false;
 

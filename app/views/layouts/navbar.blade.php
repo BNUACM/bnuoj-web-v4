@@ -12,14 +12,14 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav" id="main_navbar">
                 <li class="dropdown" id="problem">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('problem') }}">Problem <b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ action('ProblemController@getList') }}">Problem <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li id="localp"><a href="{{ url('problem?oj=BNU') }}">Local Problems</a></li>
-                        <li id="allp"><a href="{{ url('problem') }}">All Problems</a></li>
+                        <li id="localp"><a href="{{ action('ProblemController@getList') }}?oj=BNU">Local Problems</a></li>
+                        <li id="allp"><a href="{{ action('ProblemController@getList') }}">All Problems</a></li>
                         <li id="categoryp"><a href="problem_category.php">Problem Category</a></li>
                     </ul>
                 </li>
-                <li id="status"><a href="{{ url('status') }}">Status</a></li>
+                <li id="status"><a href="{{ action('StatusController@getList') }}">Status</a></li>
                 <li class="dropdown" id="contest">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="contest.php?type=50">Contest <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -53,13 +53,13 @@
 @else
             <ul id="logoutbar" class="nav navbar-nav navbar-right">
                 <li class="dropdown" id="userspace">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="/user/{{{ Auth::user()->username }}}" id="displayname">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="" id="displayname">
                         {{{ Auth::user()->username }}}
                         @if (Auth::user()->unread_message_count > 0)
                         <b style='color:#F00'> ({{ Auth::user()->unread_message_count }}) <b class="caret"></b></a>
                         @endif
                     <ul class="dropdown-menu">
-                        <li><a href="/user/{{{ Auth::user()->username }}}">Show My Information</a></li>
+                        <li><a href="">Show My Information</a></li>
                         <li><a href="#" id="modify" data-toggle="modal" data-target="#modifydialog">Modify My Information</a></li>
                         <li><a href="mail.php" id="mail">
                             Mail

@@ -2,7 +2,7 @@
 
 class StatusController extends \BaseController {
 
-    public function getIndex() {
+    public function getList() {
         return View::make('layouts.statuses.list', array('pagetitle' => 'Status List'));
     }
 
@@ -23,7 +23,7 @@ class StatusController extends \BaseController {
         //     $statuses = Status::join('language_name', 'status.language', '=', 'language_name.id')
         //         ->select(array('username', 'runid', 'pid', 'result', 'language', 'time_used', 'memory_used', 'source', 'time_submit', 'isshared'))->public();
         // }
-        
+
         return Datatables::of($statuses)
             // length
             ->edit_column('source', '{{ strlen($source) }}')

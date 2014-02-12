@@ -2,7 +2,7 @@
 
 class ProblemController extends \BaseController {
 
-    public function getIndex() {
+    public function getList() {
         return View::make('layouts.problems.list', array('pagetitle' => 'Problem List'));
     }
 

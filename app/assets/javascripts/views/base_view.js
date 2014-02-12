@@ -26,7 +26,7 @@
             MAIN_NAVBAR: "#main_navbar"
         },
 
-        ajaxLoadingHtml: '<img style="height:20px" src="' + globalConfig.misc.base_path + 'assets/ajax-loader.gif" /> Loading....',
+        ajaxLoadingHtml: '<img style="height:20px" src="' + basePath + 'assets/ajax-loader.gif" /> Loading....',
         activeNavbar: null,
 
         start: function() {
@@ -67,8 +67,9 @@
             _.each(this.events, function(func, evt) {
                 var result = evt.match(/([^ ]*) (.*)/);
                 if (result[2].indexOf(' ') == -1) {
-                    $(result[2]).on(result[1], function() {
+                    $(result[2]).on(result[1], function(evt) {
                         self[func].apply(self, arguments);
+                        evt.preventDefault();
                     });
                 } else {
                     var doms = result[2].match(/([^ ]*) (.*)/);
@@ -115,12 +116,12 @@
         onShowNews: function(evt) {
             var nnid = $(evt.target).attr("name");
             var self = this;
-            $.get(globalConfig.misc.base_path + "resource/news/" + nnid, { 'rand': Math.random() }).done(function(data) {
+            $.get(basePath + "resource/news/" + nnid, { 'rand': Math.random() }).done(function(data) {
                 var gval = $.parseJSON(data);
                 $("#sntitle", self._selectors.NEWS_MODAL).html(gval.title);
                 $("#sncontent", self._selectors.NEWS_MODAL).html(gval.content);
                 $("#sntime", self._selectors.NEWS_MODAL).html(gval.time_added);
-                $("#snauthor", self._selectors.NEWS_MODAL).html("<a href='" + globalConfig.misc.base_path + "user/" + gval.author + "'>" + gval.author + "</a>");
+                $("#snauthor", self._selectors.NEWS_MODAL).html("<a href='" + basePath + "user/show/" + gval.author + "'>" + gval.author + "</a>");
                 $(".newseditbutton", self._selectors.NEWS_MODAL).attr("name", gval.newsid);
                 $("#ntitle", self._selectors.NEWS_MODAL).html(gval.title);
                 $(self._selectors.NEWS_MODAL).modal("show");

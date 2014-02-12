@@ -140,7 +140,7 @@
                     "sZeroRecords": "No problems found.",
                     "sInfoEmpty": "No entries to show"
                 },
-                "sAjaxSource": globalConfig.misc.base_path + "resource/problem",
+                "sAjaxSource": basePath + "resource/problem",
                 "aaSorting": [ [ 1, 'asc'] ],
                 "sPaginationType": "bs_full",
                 "aLengthMenu": [[25, 50, 100, 150, 200], [25, 50, 100, 150, 200]] ,

@@ -24,3 +24,4 @@ Route::resource('resource/status', 'StatusController');
 
 Route::controller('problem', 'ProblemController');
 Route::controller('status', 'StatusController');
+Route::controller('contest', 'ContestController');

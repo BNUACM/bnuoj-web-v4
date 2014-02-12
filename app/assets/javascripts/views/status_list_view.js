@@ -83,7 +83,7 @@
                     "sZeroRecords": "No status found.",
                     "sInfoEmpty": "No status to show."
                 },
-                "sAjaxSource": globalConfig.misc.base_path + "resource/status",
+                "sAjaxSource": basePath + "resource/status",
                 "aaSorting": [ [1, 'desc'] ],
                 "bLengthChange": false,
                 "iDisplayLength": globalConfig.limits.status_per_page,
@@ -95,13 +95,13 @@
                     { "bVisible": false, "aTargets": [ 9 ] },
                     {
                         "mRender": function ( data, type, full ) {
-                            return "<a target='_blank' href='" + globalConfig.misc.base_path + "user/" + data + "'>" + data + "</a>";
+                            return "<a target='_blank' href='" + basePath + "user/" + data + "'>" + data + "</a>";
                         },
                         "aTargets": [ 0 ]
                     },
                     {
                         "mRender": function ( data, type, full ) {
-                            return "<a href='" + globalConfig.misc.base_path + "problem/" + data + "'>" + data + "</a>";
+                            return "<a href='" + basePath + "problem/" + data + "'>" + data + "</a>";
                         },
                         "aTargets": [ 2 ]
                     },

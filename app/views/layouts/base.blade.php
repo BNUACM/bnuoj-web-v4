@@ -12,6 +12,8 @@
     <script>
         var currentServerTimeStamp = {{ time() }};
         var globalConfig = ({{ json_encode(Config::get('js_global_config')) }});
+        var baseUrl = "{{ str_finish(url('/'), '/') }}";
+        var basePath = baseUrl.match('.*?\/\/.*?(\/.*)')[1];
     </script>
     <?= stylesheet_link_tag() ?>
     <?= javascript_include_tag() ?>
