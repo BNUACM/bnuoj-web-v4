@@ -181,7 +181,11 @@
                 }
             };
             _.extend(options, this.tableOptions)
-            this.listTable = $(this._selectors.DATATABLE).dataTable(options).fnSetFilteringDelay();
+            if (this.withSearchBar) {
+                this.listTable = $(this._selectors.DATATABLE).dataTable(options).fnSetFilteringDelay();
+            } else {
+                this.listTable = $(this._selectors.DATATABLE).dataTable(options);
+            }
         }
         
     });

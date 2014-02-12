@@ -82,7 +82,7 @@ class Contest extends Eloquent {
     }
 
     public function scopeRunning($query) {
-        return $query->whereRaw('
+        return $query->whereRaw('(
             start_time < NOW() AND
             (
                 end_time > NOW() OR
@@ -91,7 +91,7 @@ class Contest extends Eloquent {
                     challenge_end_time > NOW()
                 )
             )
-        ');
+        )');
     }
 
     public function scopeScheduled($query) {

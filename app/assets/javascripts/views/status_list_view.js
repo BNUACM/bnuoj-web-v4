@@ -6,7 +6,11 @@
 
         _selectors: _.extend({
             DATATABLE: "#statuslist",
-            FILTER_FORM: "#status-filter"
+            FILTER_FORM: "#status-filter",
+            USER_FILTER: "#status-filter [name='showname']",
+            PID_FILTER: "#status-filter [name='showpid']",
+            RESULT_FILTER: "#status-filter [name='showres']",
+            LANGUAGE_FILTER: "#status-filter [name='showlang']"
         }, DatatableHistoryView.prototype._selectors),
 
         activeNavbar: "#status",
@@ -16,7 +20,6 @@
         withSearchBar: false,
 
         currentInfo: _.extend({
-            OJ: null,
             userShown: null,
             pidShown: null,
             resultShown: null,
@@ -32,21 +35,30 @@
         },
 
         filterStateInfo: function(info) {
-            if (info.userShown != this.currentInfo.userShown) {
-                $(this._selectors.OJ_SELECTOR).val(info.OJ).trigger('change');
-            }
-
-            if (info.shownStat != this.currentInfo.shownStat) {
-                $(this._selectors.STAT_BTNS).filter('[stat=' + info.shownStat + ']').click();
-            }
-
-            if (info.unsolveCheck != this.currentInfo.unsolveCheck) {
-                $(this._selectors.UNSOLVED_BTNS).filter('[unsolved=' + info.unsolveCheck + ']').click();
-            }
+            $(this._selectors.USER_FILTER).val(info.userShown);
+            $(this._selectors.PID_FILTER).val(info.pidShown);
+            $(this._selectors.RESULT_FILTER).val(info.resultShown);
+            $(this._selectors.LANGUAGE_FILTER).val(info.languageShown);
+            $(this._selectors.FILTER_FORM).submit();
         },
 
         submitStatusFilter: function() {
-
+            if (this.currentInfo.userShown != $(this._selectors.USER_FILTER).val()) {
+                this.currentInfo.userShown = $(this._selectors.USER_FILTER).val();
+                this.listTable.fnFilter(this.currentInfo.userShown, 0);
+            }
+            if (this.currentInfo.pidShown != $(this._selectors.PID_FILTER).val()) {
+                this.currentInfo.pidShown = $(this._selectors.PID_FILTER).val();
+                this.listTable.fnFilter(this.currentInfo.pidShown, 2);
+            }
+            if (this.currentInfo.resultShown != $(this._selectors.RESULT_FILTER).val()) {
+                this.currentInfo.resultShown = $(this._selectors.RESULT_FILTER).val();
+                this.listTable.fnFilter(this.currentInfo.resultShown, 3);
+            }
+            if (this.currentInfo.languageShown != $(this._selectors.LANGUAGE_FILTER).val()) {
+                this.currentInfo.languageShown = $(this._selectors.LANGUAGE_FILTER).val();
+                this.listTable.fnFilter(this.currentInfo.languageShown, 4);
+            }
         },
 
         afterRenderView: function() {
@@ -62,10 +74,10 @@
         },
 
         getViewUrl: function() {
-            return (this.currentInfo.userShown == "" ? "" : "&user=" + this.currentInfo.userShown) +
-                    (this.currentInfo.pidShown == "" ? "" : "&pid=" + this.currentInfo.pidShown) +
-                    (this.currentInfo.resultShown == "" ? "" : "&result=" + this.currentInfo.shownStat) +
-                    (this.currentInfo.languageShown == "" ? "" : "&language=" + this.currentInfo.languageShown);
+            return (this.currentInfo.userShown == "" ? "" : "&user=" + encodeURIComponent(this.currentInfo.userShown)) +
+                    (this.currentInfo.pidShown == "" ? "" : "&pid=" + encodeURIComponent(this.currentInfo.pidShown)) +
+                    (this.currentInfo.resultShown == "" ? "" : "&result=" + encodeURIComponent(this.currentInfo.resultShown)) +
+                    (this.currentInfo.languageShown == "" ? "" : "&language=" + encodeURIComponent(this.currentInfo.languageShown));
         },
 
         renderView: function() {
@@ -77,7 +89,7 @@
 
         setupTableOptions: function() {
             this.tableOptions = ({
-                "sDom": '<"row"<"col-sm-12"p>r<"table-responsive"t><"col-sm-9"i><"col-sm-3">>',
+                "sDom": '<"row"<"col-sm-12"p>r<"table-responsive"t>>',
                 "oLanguage": {
                     "sEmptyTable": "No status found.",
                     "sZeroRecords": "No status found.",
@@ -91,7 +103,7 @@
                 "aoColumnDefs": [
                     { "sWidth": "170px", "aTargets": [ 8 ] },
                     { "sWidth": "210px", "aTargets": [ 3 ] },
-                    { "bSortable": false, "aTargets": [ 0, 2, 3, 4, 5, 6, 7, 8, 9 ] },
+                    { "bSortable": false, "aTargets": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ] },
                     { "bVisible": false, "aTargets": [ 9 ] },
                     {
                         "mRender": function ( data, type, full ) {

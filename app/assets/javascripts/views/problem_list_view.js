@@ -117,9 +117,9 @@
         },
 
         getViewUrl: function() {
-            return (this.currentInfo.OJ == "" ? "" : "&oj=" + this.currentInfo.OJ) +
-                    (this.currentInfo.unsolveCheck == "0" ? "" : "&unsolved=" + this.currentInfo.unsolveCheck) +
-                    (this.currentInfo.shownStat == "0" ? "" : "&stat=" + this.currentInfo.shownStat);
+            return (this.currentInfo.OJ == "" ? "" : "&oj=" + encodeURIComponent(this.currentInfo.OJ)) +
+                    (this.currentInfo.unsolveCheck == "0" ? "" : "&unsolved=" + encodeURIComponent(this.currentInfo.unsolveCheck)) +
+                    (this.currentInfo.shownStat == "0" ? "" : "&stat=" + encodeURIComponent(this.currentInfo.shownStat));
         },
 
         renderView: function() {

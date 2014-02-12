@@ -6,13 +6,13 @@
             <form id="status-filter">
                 <div class="row">
                     <div class="col-sm-3">
-                        <input type='text' name='showname' id="showname" placeholder="Username" class="form-control" value='' />
+                        <input type='text' name='showname' placeholder="Username" class="form-control" value='' />
                     </div>
                     <div class="col-sm-3">
-                        <input type='text' name='showpid' id="showpid" placeholder="Problem ID" class="form-control" />
+                        <input type='text' name='showpid' placeholder="Problem ID" class="form-control" />
                     </div>
                     <div class="col-sm-3">
-                        <select name="showres" id="showres" class="form-control">
+                        <select name="showres" class="form-control">
                             <option value=''>All</option>
                             <option value='Accepted'>Accepted</option>
                             <option value='Wrong Answer'>Wrong Answer</option>
@@ -28,21 +28,11 @@
                     <div class="col-sm-3">
                         <div class="row">
                             <div class="col-xs-6">
-                                <select name="showlang" id="showlang" class="form-control">
+                                <select name="showlang" class="form-control">
                                     <option value="">All</option>
-                                    <option value="1">GNU C++</option>
-                                    <option value="2">GNU C</option>
-                                    <option value="3">Oracle Java</option>
-                                    <option value="4">Free Pascal</option>
-                                    <option value="5">Python</option>
-                                    <option value="6">C# (Mono)</option>
-                                    <option value="7">Fortran</option>
-                                    <option value="8">Perl</option>
-                                    <option value="9">Ruby</option>
-                                    <option value="10">Ada</option>
-                                    <option value="11">SML</option>
-                                    <option value="12">Visual C++</option>
-                                    <option value="13">Visual C</option>
+                                    @foreach (LanguageName::all() as $language)
+                                        <option value="{{ $language->id }}">{{ $language->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-xs-6">
