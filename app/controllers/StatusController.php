@@ -49,11 +49,13 @@ class StatusController extends \BaseController {
         if ($length > 100) $length = 100;
 
         $statuses = $statuses->offset($offset)->take($length);
-        $result_array = $statuses->get()->toArray();
+        $result_objects = $statuses->get();
         $output_array = array();
 
-        foreach ($result_array as $value) {
+        foreach ($result_objects as $object) {
+            $value = $object->toArray();
             $value['source'] = strlen($value['source']);
+            $value['isshared'] = $object->viewable;
             $output_array[] = array_values($value);
         }
 

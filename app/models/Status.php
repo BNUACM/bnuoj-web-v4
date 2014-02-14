@@ -29,5 +29,19 @@ class Status extends Eloquent {
         // return $query->whereRaw('(contest_belong = 0 OR contest_belong IN (SELECT cid FROM contest WHERE end_time<NOW()))');
     }
 
+    // add custom attributes
+    public function getViewableAttribute() {
+        if (Auth::check() && (
+                Auth::user()->is_admin ||
+                strcasecmp(Auth::user()->username, $this->username) == 0 ||
+                ($this->isshared == 1 && (
+                    $this->contest_belong == 0 || $this->contest->is_ended
+                 ))
+            )) {
+            return true;
+        }
+        return false;
+    }
+
 }
 

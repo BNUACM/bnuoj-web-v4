@@ -19,6 +19,9 @@
 //= require datatables-bootstrap3
 //= require datatables.plugins
 //= require jquery.form
+//= require highlight.pack
+//= require handlebars
+//= require_tree templates
 //= require helpers
 //= require base_class
 //= require views/base_view

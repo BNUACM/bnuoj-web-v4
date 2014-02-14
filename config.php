@@ -67,6 +67,7 @@ $globalConfig["public"]["misc"]["OJcode"]                       =   "BNU";
 $globalConfig["public"]["misc"]["server_timezone_offset"]       =   date('Z');
 $globalConfig["public"]["misc"]["datetime_format"]              =   "YYYY-MM-DD HH:mm:ss";
 $globalConfig["public"]["misc"]["cookie_prefix"]                =   "bnuoj_";
+$globalConfig["public"]["misc"]["current_version"]              =   file_exists('.git/refs/heads/master') ? substr(file_get_contents('.git/refs/heads/master'), 0, 8) : "";
 
 $globalConfig["secret"]["misc"]["salt_problem_in_contest"]      =   "[-,-]";
 $globalConfig["secret"]["misc"]["use_latex_render"]             =   false;

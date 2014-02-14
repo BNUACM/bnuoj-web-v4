@@ -117,7 +117,10 @@ return array(
         'Bllim\Datatables\DatatablesServiceProvider',
 
         // rocketeer: https://github.com/Anahkiasen/rocketeer
-        'Rocketeer\RocketeerServiceProvider',   
+        'Rocketeer\RocketeerServiceProvider',
+
+        // l4-asset-handlebars: https://github.com/CodeSleeve/l4-asset-handlebars
+        'Codesleeve\L4AssetHandlebars\L4AssetHandlebarsServiceProvider'
 
     ),
 

@@ -12,7 +12,9 @@
 		"bllim/datatables": "dev-master",
 		"moment/moment": "dev-master",
 		"malsup/form": "dev-master",
-		"anahkiasen/rocketeer": "dev-master"
+		"anahkiasen/rocketeer": "dev-master",
+		"components/highlightjs": "dev-master",
+		"codesleeve/l4-asset-handlebars": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

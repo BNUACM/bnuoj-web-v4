@@ -46,6 +46,7 @@ return array(
 		'components/bootstrap',
 		'components/form',
 		'components/underscore',
+		'components/highlightjs',
 
 		'vendor/assets/DataTables-1.9.4',
 		'vendor/moment/moment',

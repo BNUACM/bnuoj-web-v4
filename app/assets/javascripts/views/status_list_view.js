@@ -96,14 +96,13 @@
                     "sInfoEmpty": "No status to show."
                 },
                 "sAjaxSource": basePath + "resource/status",
-                "aaSorting": [ [1, 'desc'] ],
+                "bSort": false,
                 "bLengthChange": false,
                 "iDisplayLength": globalConfig.limits.status_per_page,
                 "iDisplayStart": (this.currentInfo.page - 1) * globalConfig.limits.status_per_page,
                 "aoColumnDefs": [
                     { "sWidth": "170px", "aTargets": [ 8 ] },
                     { "sWidth": "210px", "aTargets": [ 3 ] },
-                    { "bSortable": false, "aTargets": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ] },
                     { "bVisible": false, "aTargets": [ 9 ] },
                     {
                         "mRender": function ( data, type, full ) {

@@ -11,7 +11,7 @@
         },
 
         getTime: function() {
-            $.get("/timestamp").done(function(data){
+            $.get("/timestamp", {'r': Math.random()}).done(function(data){
                 currentServerTimeStamp = data;
             });
         },
